@@ -5,30 +5,42 @@ function GeneratorBox(props) {
   const [appState, setAppState] = useState({
     loading: false,
     dish: null,
-    error: false
+    error: false,
+    savedOrder: props.savedOrder
   })
   useEffect(() => {
     generateDish();
   }, [setAppState]);
 
   const generateDish = () => {
-    setAppState({ loading: true });
-    getRandomDish()
-      .then(data => {
-        let dish = data.data.meals[0];
-        setAppState({
-          loading: false,
-          dish: dish
-        })
-        props.onGenerate(dish)
+    setAppState({ ...appState, loading: true });
+    console.log(appState.savedOrder)
+    if (appState.savedOrder) {
+      setAppState({
+        loading: false,
+        dish: props.savedOrder,
+        savedOrder: false
       })
-      .catch(error => {
-        console.error(error);
-        setAppState({
-          loading: false,
-          error: true
+      props.onGenerate(appState.dish)
+    } else {
+      getRandomDish()
+        .then(data => {
+          let dish = data.data.meals[0];
+          setAppState({
+            loading: false,
+            dish: dish
+          })
+          props.onGenerate(dish)
         })
-      })
+        .catch(error => {
+          console.error(error);
+          setAppState({
+            loading: false,
+            error: true
+          })
+        })
+    }
+
   }
 
   return (<div className="col col-desk-8 generator-box">

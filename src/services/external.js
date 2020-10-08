@@ -13,7 +13,6 @@ const getRandomDish = () => axios.get(API_URL.randomDish, { headers });
 const getDrinkList = () => axios.get(API_URL.drinkList, { headers });
 
 
-
 export {
   getRandomDish,
   getDrinkList

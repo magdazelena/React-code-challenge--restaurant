@@ -20,7 +20,7 @@ function Order(props) {
       dish: props.location.data.dish,
       drinks: props.location.data.drinks
     }
-    saveOrder(data);
+    saveOrder(data, email);
   }
   return (<div className="order grid-0">
     <h2 className="col col-desk-12">Final details</h2>
