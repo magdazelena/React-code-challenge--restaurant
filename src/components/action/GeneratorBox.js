@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getRandomDish } from '../../services/external';
 
-function GeneratorBox() {
+function GeneratorBox(props) {
   const [appState, setAppState] = useState({
     loading: false,
     dish: null,
@@ -16,11 +16,11 @@ function GeneratorBox() {
     getRandomDish()
       .then(data => {
         let dish = data.data.meals[0];
-        console.log(dish)
         setAppState({
           loading: false,
           dish: dish
         })
+        props.onGenerate(dish)
       })
       .catch(error => {
         console.error(error);
@@ -30,6 +30,7 @@ function GeneratorBox() {
         })
       })
   }
+
   return (<div className="col col-desk-8 generator-box">
     <p>How about...</p>
     {appState.dish && (
@@ -40,7 +41,7 @@ function GeneratorBox() {
       </div>
     )}
     {appState.error && (<h2>Something went wrong, try again please.</h2>)}
-    <button className="button" onClick={generateDish}>Generate a dish</button>
+    <button className="button" disabled={!appState.dish} onClick={generateDish}>Generate a dish</button>
   </div>)
 }
 

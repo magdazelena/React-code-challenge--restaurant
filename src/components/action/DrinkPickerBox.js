@@ -17,7 +17,6 @@ function DrinkPickerBox(props) {
     setAppState({ loading: true });
     getDrinkList()
       .then(res => {
-        console.log(res);
         setAppState({
           loading: false,
           drinkList: res.data,

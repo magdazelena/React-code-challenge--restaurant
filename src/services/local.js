@@ -1,19 +1,14 @@
-const saveOrder = (order) => {
-  localStorage.setItem('order', order);
+const saveOrder = (order, mail) => {
+  localStorage.setItem(mail, JSON.stringify(order));
 }
-const getCurrentOrder = () => {
-  return localStorage.getItem('order');
-}
-const getOrderByEmail = (email) => {
-  if (localStorage.getItem('email') == email) {
-    return localStorage.getItem('order');
+const getOrderByEmail = (mail) => {
+  if (localStorage.getItem(mail)) {
+    return JSON.parse(localStorage.getItem(mail));
   } else {
     return false;
   }
 }
-
 export {
   saveOrder,
-  getCurrentOrder,
   getOrderByEmail
 }

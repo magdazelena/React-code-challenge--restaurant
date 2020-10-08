@@ -1,11 +1,27 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import DatePickerBox from '../components/action/DatePickerBox';
 import { getMonthName, getWeekday, getFullMinutes, getMaxVisitHour } from '../helpers/dateFormats';
-function Order() {
+import { saveOrder } from '../services/local';
+function Order(props) {
+
   const [date, setDate] = useState(null);
   const [numOfPeople, setNumOfPeople] = useState(1);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(props.location.data ? props.location.data.email : '');
+
+  if (props.location.data === undefined) {
+    return <Redirect to="/pick-dish" />
+  }
+  const confirmOrder = () => {
+    let data = {
+      date: date,
+      numOfPeople: numOfPeople,
+      email: email,
+      dish: props.location.data.dish,
+      drinks: props.location.data.drinks
+    }
+    saveOrder(data);
+  }
   return (<div className="order grid-0">
     <h2 className="col col-desk-12">Final details</h2>
     <div className="col col-desk-6">
@@ -18,6 +34,16 @@ function Order() {
     </div>
     <div className="col col-desk-6">
       <h2>Check details and confirm</h2>
+      {props.location.data.dish && (
+        <p>You are ordering tasty {props.location.data.dish.strMeal} </p>)
+      }
+      {props.location.data.drinks && (
+        <p> You will be drinking:
+          {props.location.data.drinks.map((item, key) => {
+            return <span key={key}>{item}</span>
+          })}
+        </p>
+      )}
       {date && (
         <div>
           <p>You are booking a visit on</p>
@@ -33,16 +59,9 @@ function Order() {
         </div>
       )}
       <label> Enter email
-      <input name="email" type="email" value={email} onChange={e => setEmail(e.target.value)} />
+      <input name="email" type="email" value={email ? email : ''} onChange={e => setEmail(e.target.value)} />
       </label>
-      <Link
-        className="button"
-        to={{
-          pathname: '/confirmation',
-          state: {
-            email: email
-          }
-        }}>Order</Link>
+      <button className="button" onClick={confirmOrder}>Order</button>
     </div>
   </div>)
 }
