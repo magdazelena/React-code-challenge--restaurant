@@ -5,6 +5,7 @@ import Landing from './pages/Landing';
 import './style/base.scss';
 import PickDish from './pages/PickDish';
 import PickDrink from './pages/PickDrink';
+import Order from './pages/Order';
 function App() {
   return (
     <div className="content">
@@ -25,6 +26,11 @@ function App() {
             exact
             path="/pick-drink"
             component={PickDrink}
+          />
+          <Route
+            exact
+            path="/order"
+            component={Order}
           />
         </div>
       </div>
