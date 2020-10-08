@@ -5,7 +5,7 @@ import ContentBox from '../components/static/ContentBox';
 import Slider from '../components/static/Slider';
 
 function Landing() {
-  return (<div class="page grid-0 landing">
+  return (<div className="page grid-0 landing">
     <Slider />
     <OrderBox />
     <FindOrderBox />

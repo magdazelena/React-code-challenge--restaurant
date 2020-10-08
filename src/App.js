@@ -4,12 +4,13 @@ import { Route } from 'react-router-dom';
 import Landing from './pages/Landing';
 import './style/base.scss';
 import PickDish from './pages/PickDish';
+import PickDrink from './pages/PickDrink';
 function App() {
   return (
     <div className="content">
-      <div class="wrapper">
+      <div className="wrapper">
         <Header />
-        <div class="content-page">
+        <div className="content-page">
           <Route
             exact
             path="/"
@@ -19,6 +20,11 @@ function App() {
             exact
             path="/pick-dish"
             component={PickDish}
+          />
+          <Route
+            exact
+            path="/pick-drink"
+            component={PickDrink}
           />
         </div>
       </div>

@@ -4,7 +4,7 @@ function Header() {
   return (
     <header>
       <nav>
-        <ul class="main-menu">
+        <ul className="main-menu">
           <li>
             <a href="/" aria-label="Back to front page" id="logo">
               <img src="./images/logo.svg" alt="Sundown Boulevard logo" />
