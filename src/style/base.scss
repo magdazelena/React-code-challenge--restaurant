@@ -64,6 +64,21 @@ header {
 
 //end static
 //action
+.drink-list {
+	display: flex;
+	flex-wrap: wrap;
+	.drink-item {
+		&.selected {
+			border: 1px solid $primary;
+		}
+		p, img {
+			pointer-events: none;
+		}
+		img {
+			height: $base * 3
+		}
+	}
+}
 //end action
 //end components
 

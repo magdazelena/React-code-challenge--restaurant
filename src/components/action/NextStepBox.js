@@ -5,6 +5,7 @@ function NextStepBox(props) {
     <p>Anything to drink?</p>
     <Link
       className="button"
+      disabled={props.disabled}
       to={{
         pathname: props.pathname
       }}>Next</Link>
