@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { getDrinkList } from '../../services/external';
 
-function PickerBox(props) {
+function DrinkPickerBox(props) {
   const [appState, setAppState] = useState({
     loading: false,
     drinkList: null,
     selectedDrinks: [],
     error: false
   })
+  const updatePickingPage = props.onSelect;
   useEffect(() => {
     loadList();
   }, [setAppState]);
@@ -53,12 +54,10 @@ function PickerBox(props) {
       })
     }
   }
-  const updatePickingPage = () => {
-    props.onSelect(appState.selectedDrinks);
-  }
+
   useEffect(() => {
-    updatePickingPage();
-  }, [appState.selectedDrinks]);
+    updatePickingPage(appState.selectedDrinks);
+  }, [updatePickingPage, appState.selectedDrinks]);
 
   return (<div className="col col-desk-8  picker-box">
     <p>How about...</p>
@@ -78,4 +77,4 @@ function PickerBox(props) {
   </div>)
 }
 
-export default PickerBox;
+export default DrinkPickerBox;
