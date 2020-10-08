@@ -1,0 +1,5 @@
+@import './variables';
+
+@mixin gradient($color, $direction: top) {
+  background: linear-gradient(to $direction, $color, $secondary);
+}

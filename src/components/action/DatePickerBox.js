@@ -13,7 +13,7 @@ function DatePickerBox(props) {
     return day !== 0 && day !== 6;
   };
   return (<div className="date-picker-box">
-    <p>Pick a date and time for your visit</p>
+    <p className="label">Pick a date and time for your visit</p>
     <DatePicker
       showTimeSelect
       selected={startDate}

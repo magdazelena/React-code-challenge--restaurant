@@ -23,27 +23,20 @@ function Order(props) {
     saveOrder(data, email);
   }
   return (<div className="order grid-0">
-    <h2 className="col col-desk-12">Final details</h2>
-    <div className="col col-desk-6">
-      <label>
-        Select number of people
-        <input type="number" min="1" max="10" value={numOfPeople} onChange={e => setNumOfPeople(e.target.value)} />
-      </label>
-      <DatePickerBox onSelect={setDate} />
-
+    <h1 className="col col-desk-12">Complete your order</h1>
+    <div className="col col-desk-12 grid-0 order-details">
+      <div className="col col-desk-8">
+        <DatePickerBox onSelect={setDate} />
+      </div>
+      <div className="col col-desk-4">
+        <label>
+          <p className="label">Select number of people</p>
+          <input type="number" min="1" max="10" value={numOfPeople} onChange={e => setNumOfPeople(e.target.value)} />
+        </label>
+      </div>
     </div>
-    <div className="col col-desk-6">
+    <div className="col col-desk-8">
       <h2>Check details and confirm</h2>
-      {props.location.data.dish && (
-        <p>You are ordering tasty {props.location.data.dish.strMeal} </p>)
-      }
-      {props.location.data.drinks && (
-        <p> You will be drinking:
-          {props.location.data.drinks.map((item, key) => {
-            return <span key={key}>{item}</span>
-          })}
-        </p>
-      )}
       {date && (
         <div>
           <p>You are booking a visit on</p>
@@ -58,10 +51,23 @@ function Order(props) {
           </p>
         </div>
       )}
-      <label> Enter email
-      <input name="email" type="email" value={email ? email : ''} onChange={e => setEmail(e.target.value)} />
+      {props.location.data.dish && (
+        <p>You are ordering tasty {props.location.data.dish.strMeal} </p>)
+      }
+      {props.location.data.drinks && (
+        <div><p> You will be drinking:</p>
+          <ol>
+            {props.location.data.drinks.map((item, key) => {
+              return <li key={key}>{item}</li>
+            })}
+          </ol>
+        </div>
+      )}
+      <label>
+        <p className="label">Enter email</p>
+        <input name="email" type="email" value={email ? email : ''} onChange={e => setEmail(e.target.value)} />
       </label>
-      <button className="button" onClick={confirmOrder}>Order</button>
+      <button className="button" onClick={confirmOrder} disabled={!email}>Order</button>
     </div>
   </div>)
 }

@@ -4,10 +4,12 @@ function FindOrderBox() {
   const [email, setEmail] = useState('');
   return (<div className="col col-desk-6 find-order-box">
     <h2>Find your order</h2>
-    <label> Enter email
+    <label>
+      <p className="label">Enter email</p>
       <input name="email" type="email" value={email} onChange={e => setEmail(e.target.value)} />
     </label>
     <Link
+      disabled={email === ''}
       className="button"
       to={{
         pathname: '/pick-dish',

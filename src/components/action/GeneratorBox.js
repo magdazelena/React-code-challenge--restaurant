@@ -44,10 +44,10 @@ function GeneratorBox(props) {
   }
 
   return (<div className="col col-desk-8 generator-box">
-    <p>How about...</p>
+
     {appState.dish && (
       <div className="dish">
-        <p>...something {appState.dish.strArea}?</p>
+        <p>How about... something <span className="strong">{appState.dish.strArea}</span>?</p>
         <h2>{appState.dish.strMeal} <span className="dish-category">{appState.dish.strCategory}</span></h2>
         <img src={appState.dish.strMealThumb} alt={appState.dish.strMeal} />
       </div>

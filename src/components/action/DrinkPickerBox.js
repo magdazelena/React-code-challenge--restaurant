@@ -59,14 +59,15 @@ function DrinkPickerBox(props) {
   }, [updatePickingPage, appState.selectedDrinks]);
 
   return (<div className="col col-desk-8  picker-box">
-    <p>How about...</p>
     {appState.drinkList && (
       <div className="drink-list grid-0">
         {appState.drinkList.map((item, key) => {
           return (
-            <div className="drink-item col-desk-6" onClick={selectDrink} key={key} id={item.name}>
-              <p className="drink-tagline">{item.tagline}</p>
-              <p className="drink-name">{item.name}</p>
+            <div className="drink-item col-desk-5" onClick={selectDrink} key={key} id={item.name}>
+              <div className="drink-description">
+                <p className="drink-tagline">{item.tagline}</p>
+                <p className="drink-name">{item.name}</p>
+              </div>
               <img src={item.image_url} alt={item.name} />
             </div>)
         })}

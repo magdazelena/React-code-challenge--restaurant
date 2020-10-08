@@ -22,9 +22,13 @@ function PickDish(props) {
       dish: dish
     })
   }, [email, dish, setDish]);
-  return (<div className="grid-0">
-    <GeneratorBox savedOrder={order.dish} onGenerate={setDish} />
-    <NextStepBox name="Anything to drink?" disabled={!data.dish} pathname="/pick-drink" data={order ? order : data} />
+  return (<div >
+    <h1>Pick a dish</h1>
+    <div className="grid-0">
+      <GeneratorBox savedOrder={order.dish} onGenerate={setDish} />
+      <NextStepBox name="Anything to drink?" disabled={!data.dish} pathname="/pick-drink" data={order ? order : data} />
+    </div>
+
   </div>)
 }
 export default PickDish;

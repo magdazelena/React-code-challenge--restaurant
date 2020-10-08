@@ -1,4 +1,5 @@
 @import './settings/variables';
+@import './settings/mixins';
 @import './settings/typography';
 @import './breakpoints/1030up';
 @import './includes/grid.scss';
@@ -14,26 +15,83 @@ a {
 	&:hover {
 		color: $secondary;
 	}
-	&.button {
-		display: inline-block;
-		padding: $base/2 $base;
-		margin: $base 0;
-		background-color: $primary;
+}
+.button {
+	@include font('small', 900, uppercase);
+	border: none;
+	box-shadow: none;
+	outline: none;
+	appearance: none;
+	display: block;
+	padding: $base;
+	margin-top: $base/2;
+	color: $background;
+	position: relative;
+	@include gradient($primary);
+	&:before{
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		content:"";
+		display: block;
+		@include gradient($secondary);
+		transition: opacity .5s ease-in-out;
+		opacity: 0;
+	}
+	&:hover {
 		color: $background;
-		transition: background-color 0.5s ease-in-out;
-		&:hover {
-			background-color: $secondary;
+		&:before{
+			opacity: .3;
 		}
 	}
-}
+	&:disabled, &[disabled] {
+		opacity: 0.3;
+		pointer-events: none;
 
+	}
+}
+.col {
+	padding: $base;
+}
 ul {
 	padding-left: unset;
 	li {
 		list-style-type: none;
 	}
 }
-
+h1 {
+	@include font('regular', 900, uppercase);
+	color: $secondary;
+	padding-left: $base;
+}
+h2 {
+	@include font('header', 900, uppercase);
+	color: $secondary;
+	span {
+		@include font('small', 500, uppercase);
+		color: $primary;
+	}
+}
+.strong {
+	@include font('small', 900, uppercase);
+}
+.label {
+	@include font('small', 500, uppercase);
+	color: $secondary;
+}
+input {
+	display: block;
+	padding: $base;
+	border:3px solid $secondary;
+	margin-bottom: $base;
+	background: transparent;
+	@include font('small', 900);
+	color: $secondary;
+	width: 100%;
+	box-sizing: border-box;
+}
 //components
 //layout
 header {
@@ -42,7 +100,7 @@ header {
 		justify-content: space-between;
 		align-items: center;
 		a {
-			@include font('regular', 700, uppercase);
+			@include font('regular', 900, uppercase);
 			&#logo {
 				display: block;
 				width: $base * 4;
@@ -56,31 +114,153 @@ header {
 
 //end layout
 //generic
-.col {
-	border: 1px solid $secondary;
-}
+
 //end generic
 //static
-
+.slider {
+	background-image: url(../images/table.jpg);
+	background-size: cover;
+	background-position: center;
+	min-height: 400px;
+}
+.content-box{
+	@include gradient(transparent, left);
+	h2 {
+		color: $background;
+	}
+}
 //end static
 //action
+.picker-box {
+	padding-top: 0;
+}
 .drink-list {
 	display: flex;
 	flex-wrap: wrap;
 	.drink-item {
-		&.selected {
-			border: 1px solid $primary;
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: $base * 2 ;
+		padding: $base * 2 $base/2;
+		cursor: pointer;
+		position: relative;
+		&:nth-child(odd) {
+			margin-right: $base * 2;
+		}
+		&:before{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			content:"";
+			display: block;
+			@include gradient($primary, bottom);
+			opacity: 0;
+			transition: opacity .5s ease-in-out;
+			z-index: -1;
+		}
+		&.selected, &:hover {
+			&:before{
+				opacity: 0.5;
+			}
+		}
+		.drink-description {
+			padding: 0 $base;
+			pointer-events: none;
+			.drink-tagline {
+				@include font('small', 500, uppercase);
+				color: $primary;
+			}
+			.drink-name {
+				@include font('large', 900, uppercase);
+				color: $secondary;
+			}
 		}
 		p, img {
 			pointer-events: none;
 		}
 		img {
-			height: $base * 3
+			height: $base * 8;
 		}
 	}
 }
+.next-box {
+	border: 3px solid $secondary;
+	height: fit-content;
+	.next-text {
+		@include font('large');
+		padding-bottom: $base * 2;
+	}
+}
+.react-datepicker {
+	background-color: transparent;
+	width: 100%;
+	.react-datepicker__month-container {
+		width: 69.75%;
+	}
+	.react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
+		right: 35%;																																		
+	}
+	.react-datepicker__header {
+		background-color: $secondary;
+		
+		.react-datepicker__current-month, .react-datepicker-time__header, .react-datepicker-year-header {
+			color: $background;																																																																																			
+			@include font('regular', 900, uppercase);																															
+		}
+	}
+	.react-datepicker__time-container {
+		width: 30%;
+	}
+	.react-datepicker__time-container .react-datepicker__time {
+		background-color: transparent;
+		.react-datepicker__time-box {
+			width: 100%;
+		}
+	}
+	.react-datepicker__day--selected, 
+	.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
+		background-color: $secondary;
+		color: $background;
+		@include font('regular', 700);
+	}
+} 
 //end action
 //end components
 
 //pages
+.landing {
+	.col {
+		margin-bottom: $base * 2;
+		padding-bottom: 0;
+		&:nth-child(odd) {
+			padding-right: $base *2;
+		}
+	}
+	.order-box {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+}
+.dish {
+	img {
+		width: 100%;
+	}
+}
+.order {
+	.order-date {
+		@include font('large', 900, uppercase);
+		color: $secondary;
+	}
+	.order-hours, .order-people {
+			@include font('regular', 900, uppercase);
+			color: $primary;
+	}
+
+	.order-details {
+		padding: 0;
+	}
+}
 //end pages
