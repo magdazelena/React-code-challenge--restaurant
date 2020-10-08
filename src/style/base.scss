@@ -1,8 +1,46 @@
 @import './settings/variables';
 @import './settings/typography';
 @import './breakpoints/1030up';
-
+@import './includes/grid.scss';
 body {
 	background-color: $background;
 	@include font('regular');
 }
+//reset styles
+a {
+	text-decoration: none;
+	color: $primary;
+	transition: color 0.5s ease-in-out;
+	&:hover {
+		color: $secondary;
+	}
+}
+
+ul {
+	padding-left: unset;
+	li {
+		list-style-type: none;
+	}
+}
+
+//components
+//layout
+header {
+	.main-menu {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		a {
+			@include font('regular', 700, uppercase);
+			&#logo {
+				display: block;
+				width: $base * 4;
+				img {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+//end layout

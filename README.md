@@ -1,8 +1,8 @@
-#Sundown Boulevard site 
+# Sundown Boulevard site 
 
-##DWARF code test project
+## DWARF code test project
 
-###TODO:
+### TODO:
 - setup axios and endpoints structure
 - components structure
 - ...
