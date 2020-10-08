@@ -4,5 +4,8 @@
 
 ### TODO:
 - setup axios and endpoints structure
-- components structure
+- email validation
+- local data storage ?
+- error messages on unaccesible pages (out of flow)
+- stylessss
 - ...

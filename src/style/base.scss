@@ -14,6 +14,17 @@ a {
 	&:hover {
 		color: $secondary;
 	}
+	&.button {
+		display: inline-block;
+		padding: $base/2 $base;
+		margin: $base 0;
+		background-color: $primary;
+		color: $background;
+		transition: background-color 0.5s ease-in-out;
+		&:hover {
+			background-color: $secondary;
+		}
+	}
 }
 
 ul {
@@ -44,3 +55,17 @@ header {
 }
 
 //end layout
+//generic
+.col {
+	border: 1px solid $secondary;
+}
+//end generic
+//static
+
+//end static
+//action
+//end action
+//end components
+
+//pages
+//end pages
