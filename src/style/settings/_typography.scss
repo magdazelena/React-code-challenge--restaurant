@@ -1,0 +1,15 @@
+$font: 'Helvetica', Arial, sans-serif; //Helvetica Neue is licensed
+
+@mixin font($size : 'regular', $weight: '500') {
+  font-family: $font;
+  @if $size == 'small' {
+    font-size: 9px;
+  }
+  @if $size == 'regular' {
+    font-size: 14px;
+  }
+  @if $size == 'large' {
+    font-size: 20px;
+  }
+  font-weight: $weight;
+}

@@ -1,0 +1,8 @@
+@import './settings/variables';
+@import './settings/typography';
+@import './breakpoints/1030up';
+
+body {
+	background-color: $background;
+	@include font('regular');
+}

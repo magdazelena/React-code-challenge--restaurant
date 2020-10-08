@@ -1,0 +1,9 @@
+@import '../settings/variables';
+@import '../settings/typography';
+
+@media screen and (min-width: 1030px) {
+  .wrapper {
+    max-width: $max;
+    margin: auto;
+  }
+}
