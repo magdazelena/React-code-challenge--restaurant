@@ -110,6 +110,7 @@ header {
 			}
 		}
 	}
+	margin-bottom: $base * 2;
 }
 
 //end layout
@@ -124,6 +125,7 @@ header {
 	min-height: 400px;
 }
 .content-box{
+	padding-left: $base * 2;
 	@include gradient(transparent, left);
 	h2 {
 		color: $background;
@@ -236,12 +238,14 @@ header {
 		padding-bottom: 0;
 		&:nth-child(odd) {
 			padding-right: $base *2;
+			padding-left: 0;
 		}
 	}
 	.order-box {
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
+		padding-left: $base *2;
 	}
 }
 .dish {
