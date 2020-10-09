@@ -18,7 +18,8 @@ function PickDrink(props) {
       ...prevData,
       drinks: pickedDrinks
     }))
-  }, [pickedDrinks, setData])
+  }, [pickedDrinks, setData]);
+
   if (props.location.data === undefined) {
     return <Redirect to="/pick-dish" />
   }

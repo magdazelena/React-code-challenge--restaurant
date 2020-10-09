@@ -65,28 +65,26 @@ function DrinkPickerBox(props) {
           item.isSelected = true;
         }
       })
-      setAppState({
-        ...appState,
-        drinkList: res.data
-      })
+      setAppState(prevState => ({
+        ...prevState,
+        drinkList: res.data,
+        selectedDrinks: saved
+      }))
     });
   }
   useEffect(() => {
     if (savedOrder !== prevSavedOrder && savedOrder) {
       if (savedOrder.length) {
-        setAppState({
-          ...appState,
+        setAppState(prevState => ({
+          ...prevState,
           selectedDrinks: savedOrder,
-        });
+        }));
         updateSelectionFromSave(savedOrder);
       }
     } else {
       updatePickingPage(appState.selectedDrinks);
     }
-  }, [
-    savedOrder, appState.selectedDrinks
-  ]);
-
+  }, [savedOrder, appState.selectedDrinks]);
 
   return (<div className="col col-desk-8 col-tab-12 picker-box">
     {appState.drinkList && (
