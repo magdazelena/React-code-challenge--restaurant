@@ -120,10 +120,10 @@ header {
 //end generic
 //static
 .slider {
-	background-image: url(../images/table.jpg);
-	background-size: cover;
-	background-position: center;
-	min-height: 400px;
+	max-height: 400px;
+	.carousel .carousel-status {
+		display: none;
+	}
 }
 .content-box{
 	padding-left: $base * 2;
