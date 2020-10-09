@@ -163,10 +163,20 @@ header {
 			transition: opacity .5s ease-in-out;
 			z-index: -1;
 		}
-		&.selected, &:hover {
+		&:hover{
+			&:before {
+				opacity: 1;
+			}
+		}
+		&.selected{
 			&:before{
 				opacity: 0.5;
 			}
+			&:hover{
+			&:before {
+				opacity: 1;
+			}
+		}
 		}
 		.drink-description {
 			padding: 0 $base;

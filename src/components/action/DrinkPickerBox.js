@@ -38,11 +38,11 @@ function DrinkPickerBox(props) {
     setAppState({ ...appState, loading: true });
     getDrinkList()
       .then(res => {
-        setAppState({
-          ...appState,
+        setAppState(prevState => ({
+          ...prevState,
           loading: false,
           drinkList: res.data
-        })
+        }));
       })
       .catch(error => {
         console.error(error);
