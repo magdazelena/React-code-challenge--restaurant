@@ -227,6 +227,10 @@ header {
 		color: $background;
 		@include font('regular', 700);
 	}
+	.react-datepicker__day--today, .react-datepicker__month-text--today, .react-datepicker__quarter-text--today, .react-datepicker__year-text--today {
+		background-color: rgba($secondary, 0.3);
+		color: $text;
+	}
 } 
 //end action
 //end components
@@ -262,7 +266,9 @@ header {
 			@include font('regular', 900, uppercase);
 			color: $primary;
 	}
-
+	.missed-date {
+		text-decoration: line-through;
+	}
 	.order-details {
 		padding: 0;
 	}

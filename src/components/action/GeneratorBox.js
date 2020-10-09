@@ -6,21 +6,23 @@ function GeneratorBox(props) {
   const [appState, setAppState] = useState({
     loading: false,
     dish: null,
-    error: false
+    error: false,
+    beenPreloaded: false
   })
   const savedOrder = props.savedOrder;
   const prevSavedOrder = usePrevious(savedOrder);
   useEffect(() => {
-    if (savedOrder !== prevSavedOrder && savedOrder !== null) {
-      setAppState({
-        ...appState,
-        dish: savedOrder
-      })
-      props.onGenerate(savedOrder);
-    } else {
-      generateDish();
+    if (!appState.beenPreloaded) {
+      if (savedOrder !== prevSavedOrder && savedOrder !== null) {
+        setAppState({
+          ...appState,
+          dish: savedOrder,
+          beenPreloaded: true
+        })
+      } else {
+        generateDish();
+      }
     }
-
   }, [savedOrder, setAppState]);
 
 
@@ -30,6 +32,7 @@ function GeneratorBox(props) {
       .then(data => {
         let dish = data.data.meals[0];
         setAppState({
+          ...appState,
           loading: false,
           dish: dish
         })
@@ -38,6 +41,7 @@ function GeneratorBox(props) {
       .catch(error => {
         console.error(error);
         setAppState({
+          ...appState,
           loading: false,
           error: true
         })
@@ -52,7 +56,8 @@ function GeneratorBox(props) {
       <div className="dish">
         <p>How about... something <span className="strong">{appState.dish.strArea}</span>?</p>
         <h2>{appState.dish.strMeal} <span className="dish-category">{appState.dish.strCategory}</span></h2>
-        <img src={appState.dish.strMealThumb} alt={appState.dish.strMeal} />
+        <img src={appState.dish.strMealThumb} alt={appState.dish.strMeal} className="dish-image" />
+
       </div>
     )}
     {appState.error && (<h2>Something went wrong, try again please.</h2>)}

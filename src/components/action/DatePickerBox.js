@@ -5,9 +5,15 @@ import "react-datepicker/dist/react-datepicker.css";
 function DatePickerBox(props) {
   const [startDate, setStartDate] = useState(setHours(setMinutes(new Date(), 30), new Date().getHours()));
   const updateDateSelection = props.onSelect;
+
   useEffect(() => {
     updateDateSelection(startDate);
-  }, [updateDateSelection, startDate])
+  }, [updateDateSelection, startDate]);
+  useEffect(() => {
+    if (props.savedDate !== null)
+      setStartDate(props.savedDate)
+  }, [props.savedDate]);
+
   const isWeekday = date => {
     const day = date.getDay();
     return day !== 0 && day !== 6;

@@ -3,17 +3,18 @@ import { Redirect } from 'react-router-dom';
 import DatePickerBox from '../components/action/DatePickerBox';
 import { getMonthName, getWeekday, getFullMinutes, getMaxVisitHour } from '../helpers/dateFormats';
 import { saveOrder } from '../services/local';
+import { setHours, setMinutes } from 'date-fns';
 function Order(props) {
 
   const [date, setDate] = useState(null);
   const [numOfPeople, setNumOfPeople] = useState(1);
   const [email, setEmail] = useState(props.location.data ? props.location.data.email : '');
-
+  const [isExOrder, setisExOrder] = useState(false);
   useEffect(() => {
     if (props.location.data) {
-      setDate(new Date(props.location.data.date));
-      console.log(props.location.data.date);
+      setDate(setHours(setMinutes(new Date(props.location.data.date), 30), new Date(props.location.data.date).getHours()));
       setNumOfPeople(props.location.data.numOfPeople);
+      setisExOrder(props.location.data.existingOrder);
     }
   }, [props.location.data]);
 
@@ -31,10 +32,10 @@ function Order(props) {
     saveOrder(data, email);
   }
   return (<div className="order grid-0">
-    <h1 className="col col-desk-12">Complete your order</h1>
+    <h1 className="col col-desk-12">{isExOrder ? 'Edit' : 'Complete'} your order</h1>
     <div className="col col-desk-12 grid-0 order-details">
       <div className="col col-desk-8">
-        <DatePickerBox onSelect={setDate} />
+        <DatePickerBox savedDate={date} onSelect={setDate} />
       </div>
       <div className="col col-desk-4">
         <label>
@@ -47,11 +48,12 @@ function Order(props) {
       <h2>Check details and confirm</h2>
       {date && (
         <div>
-          <p>You are booking a visit on</p>
-          <p className="order-date">
+          { date > new Date() && (<p>You are booking a visit on</p>)}
+          { date <= new Date() && (<p>Seems like you missed your reservation. Please select another date.</p>)}
+          <p className={`order-date ${date <= new Date() ? 'missed-date' : ''}`}>
             {getWeekday(date.getDay())}, {getMonthName(date.getMonth())} {date.getDate()}, {date.getFullYear()}
           </p>
-          <p className="order-hours">
+          <p className={`order-hours ${date <= new Date() ? 'missed-date' : ''}`}>
             You reserve time from {date.getHours()}:{getFullMinutes(date.getMinutes())} till {getMaxVisitHour(date.getHours(), date.getMinutes())}
           </p>
           <p className="order-people">
@@ -75,7 +77,7 @@ function Order(props) {
         <p className="label">Enter email</p>
         <input name="email" type="email" value={email ? email : ''} onChange={e => setEmail(e.target.value)} />
       </label>
-      <button className="button" onClick={confirmOrder} disabled={!email}>Order</button>
+      <button className="button" onClick={confirmOrder} disabled={!email || date <= new Date()}>{isExOrder ? 'Update your order' : 'Place you order'}</button>
     </div>
   </div>)
 }

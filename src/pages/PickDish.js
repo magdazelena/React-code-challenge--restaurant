@@ -18,7 +18,8 @@ function PickDish(props) {
       getOrderByEmail(email)
         .then(res => {
           setData({
-            ...res
+            ...res,
+            existingOrder: true
           })
         })
         .catch(error => {
