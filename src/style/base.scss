@@ -15,6 +15,13 @@ a {
 		color: $secondary;
 	}
 }
+ul {
+	padding-left: unset;
+	li {
+		list-style-type: none;
+	}
+}
+//generic:
 .button {
 	@include font('small', 900, uppercase);
 	border: none;
@@ -54,12 +61,7 @@ a {
 .col {
 	padding: $base;
 }
-ul {
-	padding-left: unset;
-	li {
-		list-style-type: none;
-	}
-}
+
 h1 {
 	@include font('regular', 900, uppercase);
 	color: $secondary;
@@ -115,9 +117,6 @@ header {
 }
 
 //end layout
-//generic
-
-//end generic
 //static
 .slider {
 	max-height: 400px;

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { getMonthName, getWeekday, getFullMinutes, getMaxVisitHour } from '../helpers/dateFormats';
+
 function Receipt(props) {
+
   const [data, setData] = useState({})
+
   useEffect(() => {
     if (props.location.data) {
       setData(props.location.data);
     }
   }, [props.location.data]);
 
+  //page is not accessible out of the flow
   if (props.location.data === undefined) {
     return <Redirect to="/" />
   }
@@ -16,6 +20,7 @@ function Receipt(props) {
   return (<div className="col col-desk-8 col-tab-12 receipt">
 
     <h1>Your order confirmation</h1>
+
     {data && (
       <div className="receipt-content">
         <div className="receipt-item grid-0">

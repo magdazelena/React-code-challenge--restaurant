@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import FindOrderBox from '../components/action/FindOrderBox';
+
 function ErrorMail(props) {
+
   if (!props.location.email) {
     return <Redirect to="/" />
   }

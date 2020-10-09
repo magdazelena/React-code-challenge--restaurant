@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import GeneratorBox from '../components/action/GeneratorBox';
 import NextStepBox from '../components/action/NextStepBox';
 import { getOrderByEmail } from '../services/local';
 
 function PickDish(props) {
+
   const [dish, setDish] = useState(null);
   const [data, setData] = useState({
-    email: false,
+    email: props.location.state ? props.location.state.email : false,
     dish: null,
   })
-  let email = false;
-  if (props.location.state) {
-    email = props.location.state.email;
-  }
+
   useEffect(() => {
-    if (email) {
-      getOrderByEmail(email)
+    if (data.email) {
+      getOrderByEmail(data.email)
         .then(res => {
           setData({
             ...res,
@@ -27,16 +24,16 @@ function PickDish(props) {
           console.error(error);
           props.history.push({
             pathname: '/mail-not-found',
-            email: email
+            email: data.email
           });
         })
     } else {
       setData({
-        email: email,
+        ...data,
         dish: dish
       })
     }
-  }, [email, dish, setDish, setData])
+  }, [dish, setDish, setData])
 
   return (<div >
     <h1>Pick a dish</h1>

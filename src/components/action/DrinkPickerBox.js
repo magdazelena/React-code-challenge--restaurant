@@ -3,15 +3,31 @@ import { getDrinkList } from '../../services/external';
 import { usePrevious } from '../../helpers/hooks';
 
 function DrinkPickerBox(props) {
+
   const [appState, setAppState] = useState({
     loading: false,
     drinkList: null,
     selectedDrinks: [],
     error: false
   })
+
   const updatePickingPage = props.onSelect;
   const savedOrder = props.savedOrder;
   const prevSavedOrder = usePrevious(savedOrder);
+
+  useEffect(() => {
+    if (savedOrder !== prevSavedOrder && savedOrder) {
+      if (savedOrder.length) {
+        setAppState(prevState => ({
+          ...prevState,
+          selectedDrinks: savedOrder,
+        }));
+        updateSelectionFromSave(savedOrder);
+      }
+    } else {
+      updatePickingPage(appState.selectedDrinks);
+    }
+  }, [savedOrder, appState.selectedDrinks]);
 
   useEffect(() => {
     if (appState.drinkList == null)
@@ -72,19 +88,6 @@ function DrinkPickerBox(props) {
       }))
     });
   }
-  useEffect(() => {
-    if (savedOrder !== prevSavedOrder && savedOrder) {
-      if (savedOrder.length) {
-        setAppState(prevState => ({
-          ...prevState,
-          selectedDrinks: savedOrder,
-        }));
-        updateSelectionFromSave(savedOrder);
-      }
-    } else {
-      updatePickingPage(appState.selectedDrinks);
-    }
-  }, [savedOrder, appState.selectedDrinks]);
 
   return (<div className="col col-desk-8 col-tab-12 picker-box">
     {appState.drinkList && (

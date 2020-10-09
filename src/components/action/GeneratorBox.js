@@ -3,14 +3,17 @@ import { getRandomDish } from '../../services/external';
 import { usePrevious } from '../../helpers/hooks';
 
 function GeneratorBox(props) {
+
   const [appState, setAppState] = useState({
     loading: false,
     dish: null,
     error: false,
     beenPreloaded: false
   })
+
   const savedOrder = props.savedOrder;
   const prevSavedOrder = usePrevious(savedOrder);
+
   useEffect(() => {
     if (!appState.beenPreloaded) {
       if (savedOrder !== prevSavedOrder && savedOrder !== null) {
@@ -46,8 +49,6 @@ function GeneratorBox(props) {
           error: true
         })
       })
-
-
   }
 
   return (<div className="col col-desk-8 col-tab-12 generator-box">

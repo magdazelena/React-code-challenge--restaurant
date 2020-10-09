@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, Link } from 'react-router-dom';
+import { setHours, setMinutes } from 'date-fns';
 import DatePickerBox from '../components/action/DatePickerBox';
 import { getMonthName, getWeekday, getFullMinutes, getMaxVisitHour } from '../helpers/dateFormats';
 import { saveOrder } from '../services/local';
 import { isEmailValid } from '../helpers/validator';
-import { setHours, setMinutes } from 'date-fns';
+
 function Order(props) {
 
   const [date, setDate] = useState(null);
@@ -12,6 +13,7 @@ function Order(props) {
   const [email, setEmail] = useState(props.location.data ? props.location.data.email : '');
   const [data, setData] = useState({});
   const [emailValid, setEmailValid] = useState(false);
+
   useEffect(() => {
     setEmailValid(isEmailValid(email));
   }, [email]);
@@ -26,8 +28,9 @@ function Order(props) {
     }
   }, [props.location.data]);
 
+  //page is not accessible out of the flow
   if (props.location.data === undefined) {
-    return <Redirect to="/pick-dish" />
+    return <Redirect to="/" />
   }
   const confirmOrder = () => {
     let data = {

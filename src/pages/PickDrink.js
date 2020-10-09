@@ -4,8 +4,10 @@ import NextStepBox from '../components/action/NextStepBox';
 import DrinkPickerBox from '../components/action/DrinkPickerBox';
 
 function PickDrink(props) {
+
   const [pickedDrinks, setPickedDrinks] = useState([]);
   const [data, setData] = useState({});
+
   useEffect(() => {
     if (props.location.data) {
       setPickedDrinks(props.location.data.drinks);
@@ -13,6 +15,7 @@ function PickDrink(props) {
     }
   }, [props.location.data]);
 
+  //update picked drinks based on DrinkPicker
   useEffect(() => {
     setData(prevData => ({
       ...prevData,
@@ -20,8 +23,9 @@ function PickDrink(props) {
     }))
   }, [pickedDrinks, setData]);
 
+  //page is not accesible out of the flow
   if (props.location.data === undefined) {
-    return <Redirect to="/pick-dish" />
+    return <Redirect to="/" />
   }
 
   return (<div>
