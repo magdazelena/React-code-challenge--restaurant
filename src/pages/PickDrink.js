@@ -24,7 +24,7 @@ function PickDrink(props) {
   }
 
   return (<div>
-    <h1>Pick a drink</h1>
+    <h1>Anything to drink?</h1>
     <div className="grid-0">
       <DrinkPickerBox savedOrder={pickedDrinks} onSelect={setPickedDrinks} />
       <NextStepBox

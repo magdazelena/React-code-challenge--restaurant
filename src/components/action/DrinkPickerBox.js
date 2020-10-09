@@ -84,7 +84,7 @@ function DrinkPickerBox(props) {
       updatePickingPage(appState.selectedDrinks);
     }
   }, [
-    savedOrder
+    savedOrder, appState.selectedDrinks
   ]);
 
 

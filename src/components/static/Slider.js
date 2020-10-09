@@ -1,6 +1,6 @@
 import React from 'react';
 
 function Slider() {
-  return (<div className="col col-desk-8 slider">Slider</div>)
+  return (<div className="slider">Slider</div>)
 }
 export default Slider;

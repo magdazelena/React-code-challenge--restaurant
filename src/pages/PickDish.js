@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import GeneratorBox from '../components/action/GeneratorBox';
 import NextStepBox from '../components/action/NextStepBox';
 import { getOrderByEmail } from '../services/local';
@@ -23,7 +24,11 @@ function PickDish(props) {
           })
         })
         .catch(error => {
-          console.error(error)
+          console.error(error);
+          props.history.push({
+            pathname: '/mail-not-found',
+            email: email
+          });
         })
     } else {
       setData({

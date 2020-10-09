@@ -7,6 +7,7 @@ import PickDish from './pages/PickDish';
 import PickDrink from './pages/PickDrink';
 import Order from './pages/Order';
 import Receipt from './pages/Receipt';
+import ErrorMail from './pages/ErrorEmail';
 function App() {
   return (
     <div className="content">
@@ -37,6 +38,11 @@ function App() {
             exact
             path="/receipt"
             component={Receipt}
+          />
+          <Route
+            exact
+            path="/mail-not-found"
+            component={ErrorMail}
           />
         </div>
       </div>

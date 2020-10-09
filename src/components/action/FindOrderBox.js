@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 function FindOrderBox() {
   const [email, setEmail] = useState('');
-  return (<div className="col col-desk-6 find-order-box">
+  return (<div className="find-order-box">
     <h2>Find your order</h2>
     <label>
       <p className="label">Enter email</p>

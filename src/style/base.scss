@@ -69,6 +69,8 @@ h1 {
 h2 {
 	@include font('header', 900, uppercase);
 	color: $secondary;
+	padding: $base * 2 0;
+	margin: 0;
 	span {
 		@include font('small', 500, uppercase);
 		color: $primary;
@@ -127,6 +129,7 @@ header {
 .content-box{
 	padding-left: $base * 2;
 	@include gradient(transparent, left);
+	height: 100%;
 	h2 {
 		color: $background;
 	}
@@ -191,8 +194,9 @@ header {
 	border: 3px solid $secondary;
 	height: fit-content;
 	.next-text {
-		@include font('large');
+		@include font('large', 900, uppercase);
 		padding-bottom: $base * 2;
+		color: $secondary;
 	}
 }
 .react-datepicker {
@@ -238,10 +242,7 @@ header {
 //pages
 .landing {
 	.col {
-		margin-bottom: $base * 2;
-		padding-bottom: 0;
 		&:nth-child(odd) {
-			padding-right: $base *2;
 			padding-left: 0;
 		}
 	}
@@ -249,7 +250,7 @@ header {
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
-		padding-left: $base *2;
+		height: 100%;
 	}
 }
 .dish {

@@ -66,6 +66,15 @@ function Receipt(props) {
             </div>)}
 
           </div>
+
+        </div>
+        <div className="receipt-item grid-0">
+          <div className="receipt-item--name col col-desk-4">
+            Your email address
+            </div>
+          <div className="receipt-item--content col col-desk-8">
+            {data.email}
+          </div>
         </div>
       </div>
     )
