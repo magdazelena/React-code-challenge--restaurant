@@ -12,7 +12,6 @@ function PickDish(props) {
   })
   useEffect(() => {
     if (data.email) {
-      console.log(data.beenChanged)
       getOrderByEmail(data.email)
         .then(res => {
           setData({
