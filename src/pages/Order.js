@@ -3,6 +3,7 @@ import { Redirect, Link } from 'react-router-dom';
 import DatePickerBox from '../components/action/DatePickerBox';
 import { getMonthName, getWeekday, getFullMinutes, getMaxVisitHour } from '../helpers/dateFormats';
 import { saveOrder } from '../services/local';
+import { isEmailValid } from '../helpers/validator';
 import { setHours, setMinutes } from 'date-fns';
 function Order(props) {
 
@@ -10,6 +11,11 @@ function Order(props) {
   const [numOfPeople, setNumOfPeople] = useState(1);
   const [email, setEmail] = useState(props.location.data ? props.location.data.email : '');
   const [data, setData] = useState({});
+  const [emailValid, setEmailValid] = useState(false);
+  useEffect(() => {
+    setEmailValid(isEmailValid(email));
+  }, [email]);
+
   useEffect(() => {
     if (props.location.data) {
       if (props.location.data.date)
@@ -78,14 +84,16 @@ function Order(props) {
         </div>
       )}
       <label>
-        <p className="label">Enter email</p>
+        <p className="label">Enter a valid email</p>
         <input name="email" type="email" value={email ? email : ''} onChange={e => setEmail(e.target.value)} />
       </label>
-      <Link to={{
-        pathname: '/receipt',
-        data: { ...data, email: email, date: date, numOfPeople: numOfPeople }
-      }}>
-        <button className="button" onClick={confirmOrder} disabled={!email || date <= new Date()}>{data.existingOrder ? 'Update your order' : 'Place you order'}</button>
+      <Link
+        disabled={!emailValid || date <= new Date()}
+        to={{
+          pathname: '/receipt',
+          data: { ...data, email: email, date: date, numOfPeople: numOfPeople }
+        }}>
+        <button className="button" onClick={confirmOrder} disabled={!emailValid || date <= new Date()}>{data.existingOrder ? 'Update your order' : 'Place you order'}</button>
       </Link>
     </div>
   </div>)
