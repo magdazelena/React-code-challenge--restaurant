@@ -1,23 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import NextStepBox from '../components/action/NextStepBox';
 import DrinkPickerBox from '../components/action/DrinkPickerBox';
 
 function PickDrink(props) {
   const [pickedDrinks, setPickedDrinks] = useState([]);
+  const [data, setData] = useState({});
+  useEffect(() => {
+    if (props.location.data) {
+      setPickedDrinks(props.location.data.drinks);
+      setData(props.location.data);
+    }
+  }, [props.location.data]);
+
+  useEffect(() => {
+    setData(prevData => ({
+      ...prevData,
+      drinks: pickedDrinks
+    }))
+  }, [pickedDrinks, setData])
   if (props.location.data === undefined) {
     return <Redirect to="/pick-dish" />
   }
+
   return (<div>
     <h1>Pick a drink</h1>
     <div className="grid-0">
-      <DrinkPickerBox onSelect={setPickedDrinks} />
+      <DrinkPickerBox savedOrder={pickedDrinks} onSelect={setPickedDrinks} />
       <NextStepBox
-        data={{
-          email: props.location.data.email,
-          dish: props.location.data.dish,
-          drinks: pickedDrinks
-        }}
+        data={data}
         disabled={pickedDrinks && pickedDrinks.length === 0}
         name="Pick a date and number of guests"
         label="Choose at least one drink"

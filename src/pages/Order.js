@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import DatePickerBox from '../components/action/DatePickerBox';
 import { getMonthName, getWeekday, getFullMinutes, getMaxVisitHour } from '../helpers/dateFormats';
@@ -8,6 +8,14 @@ function Order(props) {
   const [date, setDate] = useState(null);
   const [numOfPeople, setNumOfPeople] = useState(1);
   const [email, setEmail] = useState(props.location.data ? props.location.data.email : '');
+
+  useEffect(() => {
+    if (props.location.data) {
+      setDate(new Date(props.location.data.date));
+      console.log(props.location.data.date);
+      setNumOfPeople(props.location.data.numOfPeople);
+    }
+  }, [props.location.data]);
 
   if (props.location.data === undefined) {
     return <Redirect to="/pick-dish" />

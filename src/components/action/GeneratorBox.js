@@ -1,45 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import { getRandomDish } from '../../services/external';
+import { usePrevious } from '../../helpers/hooks';
 
 function GeneratorBox(props) {
   const [appState, setAppState] = useState({
     loading: false,
     dish: null,
-    error: false,
-    savedOrder: props.savedOrder
+    error: false
   })
+  const savedOrder = props.savedOrder;
+  const prevSavedOrder = usePrevious(savedOrder);
   useEffect(() => {
-    generateDish();
-  }, [setAppState]);
+    if (savedOrder !== prevSavedOrder && savedOrder !== null) {
+      setAppState({
+        ...appState,
+        dish: savedOrder
+      })
+      props.onGenerate(savedOrder);
+    } else {
+      generateDish();
+    }
+
+  }, [savedOrder, setAppState]);
+
 
   const generateDish = () => {
     setAppState({ ...appState, loading: true });
-    console.log(appState.savedOrder)
-    if (appState.savedOrder) {
-      setAppState({
-        loading: false,
-        dish: props.savedOrder,
-        savedOrder: false
+    getRandomDish()
+      .then(data => {
+        let dish = data.data.meals[0];
+        setAppState({
+          loading: false,
+          dish: dish
+        })
+        props.onGenerate(dish)
       })
-      props.onGenerate(appState.dish)
-    } else {
-      getRandomDish()
-        .then(data => {
-          let dish = data.data.meals[0];
-          setAppState({
-            loading: false,
-            dish: dish
-          })
-          props.onGenerate(dish)
+      .catch(error => {
+        console.error(error);
+        setAppState({
+          loading: false,
+          error: true
         })
-        .catch(error => {
-          console.error(error);
-          setAppState({
-            loading: false,
-            error: true
-          })
-        })
-    }
+      })
+
 
   }
 

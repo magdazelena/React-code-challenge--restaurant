@@ -13,20 +13,30 @@ function PickDish(props) {
   if (props.location.state) {
     email = props.location.state.email;
   }
-
-  let order = getOrderByEmail(email);
-
   useEffect(() => {
-    setData({
-      email: email,
-      dish: dish
-    })
-  }, [email, dish, setDish]);
+    if (email) {
+      getOrderByEmail(email)
+        .then(res => {
+          setData({
+            ...res
+          })
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    } else {
+      setData({
+        email: email,
+        dish: dish
+      })
+    }
+  }, [email, dish, setDish, setData])
+
   return (<div >
     <h1>Pick a dish</h1>
     <div className="grid-0">
-      <GeneratorBox savedOrder={order.dish} onGenerate={setDish} />
-      <NextStepBox name="Anything to drink?" disabled={!data.dish} pathname="/pick-drink" data={order ? order : data} />
+      <GeneratorBox savedOrder={data.dish} onGenerate={setDish} />
+      <NextStepBox name="Anything to drink?" disabled={!data.dish} pathname="/pick-drink" data={data} />
     </div>
 
   </div>)
