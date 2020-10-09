@@ -273,4 +273,21 @@ header {
 		padding: 0;
 	}
 }
+.receipt {
+	.receipt-item {
+		border-bottom: 3px solid $secondary;
+		padding: $base  0;
+		&:last-child {
+			border-bottom: none;
+		}
+		.receipt-item--name {
+			@include font('small', 900, uppercase);
+			color: $secondary;
+		}
+		ol {
+			margin: 0;
+			padding-left: $base;
+		}
+	}
+}
 //end pages

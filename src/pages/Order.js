@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import DatePickerBox from '../components/action/DatePickerBox';
 import { getMonthName, getWeekday, getFullMinutes, getMaxVisitHour } from '../helpers/dateFormats';
 import { saveOrder } from '../services/local';
@@ -9,12 +9,12 @@ function Order(props) {
   const [date, setDate] = useState(null);
   const [numOfPeople, setNumOfPeople] = useState(1);
   const [email, setEmail] = useState(props.location.data ? props.location.data.email : '');
-  const [isExOrder, setisExOrder] = useState(false);
+  const [data, setData] = useState({});
   useEffect(() => {
     if (props.location.data) {
       setDate(setHours(setMinutes(new Date(props.location.data.date), 30), new Date(props.location.data.date).getHours()));
       setNumOfPeople(props.location.data.numOfPeople);
-      setisExOrder(props.location.data.existingOrder);
+      setData(props.location.data);
     }
   }, [props.location.data]);
 
@@ -29,10 +29,11 @@ function Order(props) {
       dish: props.location.data.dish,
       drinks: props.location.data.drinks
     }
+    setData(data);
     saveOrder(data, email);
   }
   return (<div className="order grid-0">
-    <h1 className="col col-desk-12">{isExOrder ? 'Edit' : 'Complete'} your order</h1>
+    <h1 className="col col-desk-12">{data.existingOrder ? 'Edit' : 'Complete'} your order</h1>
     <div className="col col-desk-12 grid-0 order-details">
       <div className="col col-desk-8">
         <DatePickerBox savedDate={date} onSelect={setDate} />
@@ -77,7 +78,12 @@ function Order(props) {
         <p className="label">Enter email</p>
         <input name="email" type="email" value={email ? email : ''} onChange={e => setEmail(e.target.value)} />
       </label>
-      <button className="button" onClick={confirmOrder} disabled={!email || date <= new Date()}>{isExOrder ? 'Update your order' : 'Place you order'}</button>
+      <Link to={{
+        pathname: '/receipt',
+        data: data
+      }}>
+        <button className="button" onClick={confirmOrder} disabled={!email || date <= new Date()}>{data.existingOrder ? 'Update your order' : 'Place you order'}</button>
+      </Link>
     </div>
   </div>)
 }

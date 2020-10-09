@@ -6,6 +6,7 @@ import './style/base.scss';
 import PickDish from './pages/PickDish';
 import PickDrink from './pages/PickDrink';
 import Order from './pages/Order';
+import Receipt from './pages/Receipt';
 function App() {
   return (
     <div className="content">
@@ -31,6 +32,11 @@ function App() {
             exact
             path="/order"
             component={Order}
+          />
+          <Route
+            exact
+            path="/receipt"
+            component={Receipt}
           />
         </div>
       </div>
