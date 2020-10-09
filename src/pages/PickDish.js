@@ -8,11 +8,11 @@ function PickDish(props) {
   const [dish, setDish] = useState(null);
   const [data, setData] = useState({
     email: props.location.state ? props.location.state.email : false,
-    dish: null,
+    dish: null
   })
-
   useEffect(() => {
     if (data.email) {
+      console.log(data.beenChanged)
       getOrderByEmail(data.email)
         .then(res => {
           setData({
@@ -39,7 +39,7 @@ function PickDish(props) {
     <h1>Pick a dish</h1>
     <div className="grid-0">
       <GeneratorBox savedOrder={data.dish} onGenerate={setDish} />
-      <NextStepBox name="Anything to drink?" disabled={!data.dish} pathname="/pick-drink" data={data} />
+      <NextStepBox name="Anything to drink?" disabled={!data.dish} pathname="/pick-drink" data={{ ...data, dish: dish }} />
     </div>
 
   </div>)
