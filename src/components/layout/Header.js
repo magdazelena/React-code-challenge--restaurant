@@ -4,12 +4,10 @@ function Header() {
   return (
     <header>
       <nav>
+        <a href="/" aria-label="Back to front page" id="logo">
+          <img src="./images/logo.svg" alt="Sundown Boulevard logo" />
+        </a>
         <ul className="main-menu">
-          <li>
-            <a href="/" aria-label="Back to front page" id="logo">
-              <img src="./images/logo.svg" alt="Sundown Boulevard logo" />
-            </a>
-          </li>
           <li>
             <a href="/">
               Restauranter

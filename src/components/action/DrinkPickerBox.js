@@ -88,7 +88,7 @@ function DrinkPickerBox(props) {
   ]);
 
 
-  return (<div className="col col-desk-8  picker-box">
+  return (<div className="col col-desk-8 col-tab-12 picker-box">
     {appState.drinkList && (
       <div className="drink-list grid-0">
         {appState.drinkList.map((item, key) => {

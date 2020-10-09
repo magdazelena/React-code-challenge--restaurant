@@ -50,7 +50,7 @@ function GeneratorBox(props) {
 
   }
 
-  return (<div className="col col-desk-8 generator-box">
+  return (<div className="col col-desk-8 col-tab-12 generator-box">
 
     {appState.dish && (
       <div className="dish">

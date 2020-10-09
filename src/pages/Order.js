@@ -44,17 +44,17 @@ function Order(props) {
   return (<div className="order grid-0">
     <h1 className="col col-desk-12">{data.existingOrder ? 'Edit' : 'Complete'} your order</h1>
     <div className="col col-desk-12 grid-0 order-details">
-      <div className="col col-desk-8">
+      <div className="col col-desk-8 col-tab-12">
         <DatePickerBox savedDate={date} onSelect={setDate} />
       </div>
-      <div className="col col-desk-4">
+      <div className="col col-desk-4 col-tab-12">
         <label>
           <p className="label">Select number of people</p>
           <input type="number" min="1" max="10" value={numOfPeople} onChange={e => setNumOfPeople(e.target.value)} />
         </label>
       </div>
     </div>
-    <div className="col col-desk-8">
+    <div className="col col-desk-8 col-tab-12">
       <h2>Check details and confirm</h2>
       {date && (
         <div>

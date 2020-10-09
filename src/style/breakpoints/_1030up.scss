@@ -6,4 +6,29 @@
     max-width: $max;
     margin: auto;
   }
+
+//layout
+header {
+
+	.main-menu {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		a {
+      @include font('regular', 900, uppercase);
+      margin-left: $base*2;
+		}
+	}
+	margin-bottom: $base * 2;
+}
+
+//end layout
+  //pages
+  .landing {
+    .col {
+      &:nth-child(odd) {
+        padding-left: 0;
+      }
+    }
+  }
 }

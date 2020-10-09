@@ -1,7 +1,6 @@
 @import './settings/variables';
 @import './settings/mixins';
 @import './settings/typography';
-@import './breakpoints/1030up';
 @import './includes/grid.scss';
 body {
 	background-color: $background;
@@ -97,20 +96,20 @@ input {
 //components
 //layout
 header {
-	.main-menu {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		a {
-			@include font('regular', 900, uppercase);
-			&#logo {
+  nav {
+    #logo {
 				display: block;
 				width: $base * 4;
 				img {
 					width: 100%;
 				}
-			}
-		}
+    }
+    display: flex;
+		justify-content: space-between;
+		align-items: center;
+  }
+	.main-menu {
+		display: none;
 	}
 	margin-bottom: $base * 2;
 }
@@ -241,11 +240,7 @@ header {
 
 //pages
 .landing {
-	.col {
-		&:nth-child(odd) {
-			padding-left: 0;
-		}
-	}
+	
 	.order-box {
 		display: flex;
 		flex-direction: column;
@@ -292,3 +287,4 @@ header {
 	}
 }
 //end pages
+@import './breakpoints/1030up';

@@ -13,7 +13,7 @@ function Receipt(props) {
     return <Redirect to="/" />
   }
 
-  return (<div className="col col-desk-8 receipt">
+  return (<div className="col col-desk-8 col-tab-12 receipt">
 
     <h1>Your order confirmation</h1>
     {data && (
